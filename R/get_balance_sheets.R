@@ -1,7 +1,7 @@
 #' Download balance sheets from [Brazilian Central Bank](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("stable")`
 #'
 #' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Brazilian Central Bank
 #' for one or more institution types and stores them in a local directory. ZIP
@@ -54,7 +54,6 @@
 #'     a short note when a local file existed and was not overwritten.
 #'
 #' @examples
-#'
 #' # Download balance sheets of credit unions for December of 2023
 #' get_balance_sheets(
 #'   institution = "COOPERATIVAS",
@@ -76,13 +75,12 @@
 #'   overwrite = FALSE
 #' )
 #'}
-#'
 #' @references
 #' Source Banco Central do Brasil (Bacen): [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #' Note:
 #'   The values are not changed or processed in any way, they are downloaded as-is from the source.
-#'   Check the function `treat_balance_sheets()` for tools to read and process
-#'   Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
+#'
+#'
 #'
 #' @export
 #'

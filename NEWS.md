@@ -1,3 +1,14 @@
+# bacenR 0.4.3
+
+* Vignettes texts improved
+
+* Fixed error handle when website is not available at `get_normative_data()`
+
+# bacenR 0.4.0
+
+* Function added:
+    - `tidy_ifdata_reports()`
+
 # bacenR 0.3.1
 
 * Function renamed:
@@ -10,7 +21,6 @@
 * New functions added:
     - `get_ifdata_registry()`: Download institution registry data from Bacen IFdata Cadastro
     - `get_ifdata_values()`: Download data financial information from IFdata of Brazilian Central Bank (Bacen)
-
 
 # bacenR 0.2.0
 

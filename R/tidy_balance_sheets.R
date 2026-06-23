@@ -1,7 +1,7 @@
 #' Process and reshape balances CSV exports from the Brazilian Central Bank (Bacen) downloaded via `get_balance_sheets()`.
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#'  `r lifecycle::badge("stable")`
 #'
 #' `tidy_balance_sheets` reads raw CSV export files produced by the BCB and downloaded via `get_balance_sheets()`, normalizes filenames, locates the
 #' header row, imports rows matching a specific document number, cleans column names, pivots account balances so
@@ -65,7 +65,6 @@
 #'   [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @examples
-#'
 #' # First, download balance sheets
 #' get_balance_sheets(
 #'   institution = "BANCOS",
@@ -93,7 +92,6 @@
 #'   save = TRUE
 #' )
 #'}
-#'
 #' @export
 
 tidy_balance_sheets <- function(

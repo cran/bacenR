@@ -444,14 +444,21 @@ interface</a>.</li>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="at">type_institution =</span> <span class="dv">2</span></span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
+<li><code>tidy_ifdata_reports()</code>: tidy the data.frames downloaded
+with <code>get_ifdata_reports()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>tidy_cc_ativa_pj_modalidade_20142024 <span class="ot">&lt;-</span> bacenR<span class="sc">::</span><span class="fu">tidy_ifdata_reports</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  cc_ativa_pj_modalidade_20142024</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
 <li><code>get_ifdata_registry()</code>: download <a href="https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao">IFdata
 Registry data</a> for specified years and months.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Multiple years and months</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">get_ifdata_registry</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2023</span>, <span class="dv">2024</span>), </span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="at">month =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">12</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Multiple years and months</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">get_ifdata_registry</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2023</span>, <span class="dv">2024</span>), </span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="at">month =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">12</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>For more details and examples, see the project on GitHub: <a href="https://github.com/rtheodoro/bacenR">https://github.com/rtheodoro/bacenR</a></p>
 
 

@@ -1,8 +1,9 @@
 # bacenR
+<img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 
-[![CRAN status](https://www.r-pkg.org/badges/version/bacenR)](https://CRAN.R-project.org/package=bacenR) [![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/bacenR)](https://CRAN.R-project.org/package=bacenR) [![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/bacenR?color=yellow)](https://cran.r-project.org/package=bacenR) [![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
 <!-- badges: end -->
 
@@ -31,9 +32,15 @@ To get data about IPCA, Selic, GDP, Government Debt, and others, check the packa
 
 ## Install
 
-You can install the development version of `bacenR` like so:
+You can install the *stable* version of `bacenR` like so:
 
-``` r
+```r
+install.packages("bacenR")
+```
+
+Or, you can install the *development* version of `bacenR` like so:
+
+```r
 # install.packages("pak") # if you don't have pak installed yet
 pak::pak("rtheodoro/bacenR")
 ```
@@ -98,6 +105,11 @@ cc_ativa_pj_modalidade_20142024 <- bacenR::get_ifdata_reports(
   type_institution = 2
 )
 
+# Tidy data from IFdata Reports
+tidy_cc_ativa_pj_modalidade_20142024 <- bacenR::tidy_ifdata_reports(
+  cc_ativa_pj_modalidade_20142024
+)
+
 # Get data from IFdata Registry (Cadastro)
 data <- get_ifdata_registry(
   year = c(2023, 2024), 
@@ -148,7 +160,8 @@ citation("bacenR")
   title = "bacenR: Access Data from Brazilian Central Bank - IFdata, Active Institutions, Balance Sheets and Normative Acts",
   author = "Ricardo Theodoro",
   year = "2026",
-  version = "v0.3.1",
+  version = "v0.4.3",
+  doi = "10.32614/CRAN.package.bacenR",
   url = "https://github.com/rtheodoro/bacenR"
 }
 ```

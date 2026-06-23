@@ -15,9 +15,10 @@ get_normative_data(terms, ini_date, end_date)
 }
 \value{
 data.frame containing the records returned by the API and the post-processed columns.
+Returns an empty data.frame if the server is unavailable or no internet connection.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Queries the Bacen normative search API, collects all results within the provided
 date range and returns a data.frame with the records.
@@ -37,10 +38,10 @@ Data are downloaded from \url{https://www.bcb.gov.br/estabilidadefinanceira/busc
 }
 }
 \examples{
-
+\dontrun{
 ini_date <- "2025-01-01"
 end_date <- "2025-01-05"
 terms <- c("Cooperativas", "Cooperativa")
 normas <- get_normative_data(terms, ini_date, end_date)
-
+}
 }

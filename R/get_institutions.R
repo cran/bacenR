@@ -13,14 +13,13 @@
 #' \item "CONGLOMERADOS"
 #' \item "BANCOS"
 #' \item "COOPERATIVAS"
-#' \item "CONSORCIO"
+#' \item "ADMCONSORCIO"
 #' \item "SOCIEDADES"
 #' }
 #' Default is "COOPERATIVAS". Case-insensitive. Check the details on [Bacen's website](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento).
-#' @param start_date Character. Start date in "YYYYMM" format (e.g., "200709") or
-#'   a parsable date string (e.g., "2007-09-01"). Default is "200709".
-#' @param end_date Character. End date in "YYYYMM" format (e.g., "202409") or
-#'   a parsable date string (e.g., "2024-09-01"). Default is "202409".
+#' @param years Numeric vector. Year(s) to download, e.g. `c(2020:2023)` or `c(2020, 2022)`.
+#' @param months Numeric vector. Month(s) to download, values between 1 and 12,
+#'   e.g. `c(1:12)` or `c(6, 12)`.
 #' @param out_dir Character. Directory path where downloaded files will be saved.
 #'   Default is "data". The directory will be created if it doesn't exist.
 #' @param cleanup_zip Logical. If TRUE, removes ZIP files after extraction.
@@ -35,19 +34,24 @@
 #' The function performs the following steps:
 #' \itemize{
 #'   \item Validates institution types against known valid options
-#'   \item Generates a sequence of months between start_date and end_date
+#'   \item Generates every combination of `years` x `months` as year-month strings
 #'   \item Downloads ZIP files for each institution and month from BCB website
 #'   \item Extracts the downloaded ZIP files to the output directory
 #'   \item Optionally removes ZIP files after extraction
 #'   \item Displays progress information if verbose = TRUE
 #' }
 #'
+#' For `CONGLOMERADOS`, the file suffix on BCB's server changed from the plural
+#' "CONGLOMERADOS" to the singular "CONGLOMERADO" starting in months after 2022
+#' (e.g. `.../202208CONGLOMERADOS.zip` vs. `.../202607CONGLOMERADO.zip`). This is
+#' handled internally and is transparent to the caller.
+#'
 #' Institution type mappings:
 #' \itemize{
 #'   \item CONGLOMERADOS: Conglomerados
 #'   \item BANCOS: Bancos comerciais, múltiplos e caixa
 #'   \item COOPERATIVAS: Cooperativas de crédito
-#'   \item CONSORCIO: Consórcios administrativos
+#'   \item ADMCONSORCIO: Consórcios administrativos
 #'   \item SOCIEDADES: Bancos de investimentos, desenvolvimento e sociedades corretoras
 #' }
 #'
@@ -55,24 +59,24 @@
 #' # Download cooperative credit unions data for 2023
 #' get_institutions(
 #'   institution = "COOPERATIVAS",
-#'   start_date = "202311",
-#'   end_date = "202312",
+#'   years = 2023,
+#'   months = 11:12,
 #'   out_dir = tempdir()
 #' )
 #'\donttest{
 #' # Download multiple institution types
 #' get_institutions(
 #'   institution = c("BANCOS", "COOPERATIVAS"),
-#'   start_date = "202201",
-#'   end_date = "202212",
+#'   years = 2022,
+#'   months = 1:12,
 #'   out_dir = tempdir()
 #' )
 #'
 #' # Skip downloading, just use existing files
 #' get_institutions(
 #'   institution = "BANCOS",
-#'   start_date = "202201",
-#'   end_date = "202212",
+#'   years = 2022,
+#'   months = 1:12,
 #'   out_dir = tempdir(),
 #'   verbose = FALSE
 #' )
@@ -83,8 +87,8 @@
 #' @export
 get_institutions <- function(
   institution,
-  start_date,
-  end_date,
+  years,
+  months,
   out_dir,
   cleanup_zip = TRUE,
   verbose = TRUE
@@ -93,7 +97,7 @@ get_institutions <- function(
     CONGLOMERADOS = "Conglomerados",
     BANCOS = "Bancos_comerciais-multiplos-caixa",
     COOPERATIVAS = "Cooperativas-de-credito",
-    CONSORCIO = "Consorcios-adm",
+    ADMCONSORCIO = "Consorcios-adm",
     SOCIEDADES = "Bancos-investimentos-desenvolvimento-sociedade-corretoras"
   )
 
@@ -110,29 +114,31 @@ get_institutions <- function(
     stop("No valid institution keys provided.")
   }
 
-  make_date_ym <- function(ym) {
-    ym <- as.character(ym)
-    if (grepl("^\\d{6}$", ym)) {
-      y <- substr(ym, 1, 4)
-      m <- substr(ym, 5, 6)
-      as.Date(paste0(y, "-", m, "-01"))
-    } else {
-      as.Date(ym)
-    }
+  if (!is.numeric(years) || anyNA(years)) {
+    stop("years must be a numeric vector, e.g. c(2020:2023).")
   }
-
-  start_dt <- make_date_ym(start_date)
-  end_dt <- make_date_ym(end_date)
-  if (is.na(start_dt) || is.na(end_dt)) {
+  if (!is.numeric(months) || anyNA(months) || any(months < 1 | months > 12)) {
     stop(
-      "start_date or end_date could not be parsed as dates; expected 'YYYYMM' or a parsable date string (e.g. 'YYYY-MM-DD')."
+      "months must be a numeric vector with values between 1 and 12, e.g. c(1:12)."
     )
   }
 
-  datas <- format(seq(start_dt, end_dt, by = "month"), "%Y%m")
+  grid <- expand.grid(year = as.integer(years), month = as.integer(months))
+  datas <- sprintf("%04d%02d", grid$year, grid$month) |> sort()
 
   if (!dir.exists(out_dir)) {
     dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  }
+
+  # helper: resolve the file-name label for an institution/year-month,
+  # accounting for the CONGLOMERADOS -> CONGLOMERADO rename after 2022
+  resolve_inst_label <- function(inst, year_month) {
+    ano <- as.integer(substr(year_month, 1, 4))
+    if (inst == "CONGLOMERADOS" && !is.na(ano) && ano > 2022) {
+      "CONGLOMERADO"
+    } else {
+      inst
+    }
   }
 
   # helper: download & unzip one month for one institution directly into out_dir
@@ -142,16 +148,18 @@ get_institutions <- function(
       return(FALSE)
     }
 
+    inst_label <- resolve_inst_label(inst, year_month)
+
     url <- paste0(
       "https://www.bcb.gov.br/content/estabilidadefinanceira/relacao_instituicoes_funcionamento/",
       prefix,
       "/",
       year_month,
-      inst,
+      inst_label,
       ".zip"
     )
 
-    zip_path <- file.path(out_dir, paste0(inst, "_", year_month, ".zip"))
+    zip_path <- file.path(out_dir, paste0(inst_label, "_", year_month, ".zip"))
 
     resp <- tryCatch(
       {

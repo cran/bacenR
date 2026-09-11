@@ -407,21 +407,23 @@ regulated by Bacen in activity</a></li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Download multiple institution types</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">get_institutions</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">institution =</span> <span class="fu">c</span>(<span class="st">&quot;BANCOS&quot;</span>, <span class="st">&quot;COOPERATIVAS&quot;</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="at">start_date =</span> <span class="st">&quot;202201&quot;</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="at">end_date =</span> <span class="st">&quot;202212&quot;</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="at">out_dir =</span> <span class="fu">tempdir</span>()</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">institution =</span> <span class="fu">c</span>(<span class="st">&quot;CONGLOMERADOS&quot;</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="at">years =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2025</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="at">months =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="at">out_dir =</span> <span class="fu">tempdir</span>(),</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="at">cleanup_zip =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>tidy_institutions()</code>: precess the data downloaded with
 <code>get_institutions()</code> and combine them into a single, unified
 file</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># First, download institution data</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a> <span class="fu">get_institutions</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">institution =</span> <span class="st">&quot;COOPERATIVAS&quot;</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="at">start_date =</span> <span class="st">&quot;202311&quot;</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="at">end_date =</span> <span class="st">&quot;202312&quot;</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">get_institutions</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>   <span class="at">institution =</span> <span class="st">&quot;COOPERATIVAS&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>   <span class="at">years =</span> <span class="dv">2023</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>   <span class="at">months =</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">12</span>,</span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="at">out_dir =</span> <span class="fu">tempdir</span>()</span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>)</span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>

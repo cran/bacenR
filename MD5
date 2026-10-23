@@ -1,8 +1,8 @@
-99da68399812c691d4c006473399fc14 *DESCRIPTION
+e4d881d73683e559b12e2e3b758d99fc *DESCRIPTION
 29991370e41121a931d474850f9183af *NAMESPACE
-2dae5ca4ac71b5a5db8b13b3d18bfcc8 *NEWS.md
+0dccdf3466d4a6b2bd5002f2cebac273 *NEWS.md
 2a607444b6eb9d190cc2f45cb35dacc4 *R/bacenR-package.R
-ad16d09c1bad424c692ce870d59418e5 *R/get_balance_sheets.R
+fc2e647681d95b8b2617ad47ca8cd060 *R/get_balance_sheets.R
 b274e04b07d6ad01f067a83f49413013 *R/get_ifdata_registry.R
 5b45171ccaf126155cfca50e88711323 *R/get_ifdata_reports.R
 42daea5d796a96ec76d642d465e2c70f *R/get_institutions.R
@@ -11,7 +11,7 @@ b274e04b07d6ad01f067a83f49413013 *R/get_ifdata_registry.R
 d039d216240b5221384a74f3b753353b *R/import_balance_sheets.R
 7d342f339534fe97ff5c61230ddfad9d *R/tidy_balance_sheets.R
 980ef0ada565f0614664030b1dc4ec1f *R/tidy_ifdata_reports.R
-9e62059d1f2fe5e5f0d2db4edce898e8 *R/tidy_institutions.R
+4737b7787f75a3970b063793225bb239 *R/tidy_institutions.R
 6a9cb484b1bbb09114a58f310f1bbc4b *README.md
 9af4a238a2bc9c07ef303f62c5b44d76 *build/vignette.rds
 d43eb429e4f88add24b09c022740431e *inst/CITATION
@@ -23,8 +23,8 @@ f0ad52ca2ea4564e9f622d9f7abe3973 *inst/doc/bacenR.html
 691b1eb2aec9e1bec96b79d11ba5e631 *man/figures/lifecycle-experimental.svg
 ed42e3fbd7cc30bc6ca8fa9b658e24a8 *man/figures/lifecycle-stable.svg
 bf2f1ad432ecccee3400afe533404113 *man/figures/lifecycle-superseded.svg
-4a7f72280e971cb05fdac89132f2aced *man/figures/logo.png
-3548d78f2bbf6466c178062028684608 *man/get_balance_sheets.Rd
+6988848b6addbccbcfdab5e449c730da *man/figures/logo.png
+004012b53339a44e145073fb16172c3c *man/get_balance_sheets.Rd
 7e76e46c6ecec3ec9365736296f7dc9b *man/get_ifdata_registry.Rd
 5081f951c4708ff16e1229d2cfafc372 *man/get_ifdata_reports.Rd
 e610e8b1c9cead590d2600276f692364 *man/get_institutions.Rd
@@ -33,7 +33,7 @@ e610e8b1c9cead590d2600276f692364 *man/get_institutions.Rd
 9545e5079c1ced9c588a38939f330062 *man/import_balance_sheets.Rd
 7e68b5d03cbfcdfcd6f0ac1563f85c60 *man/tidy_balance_sheets.Rd
 15e039526a95fe3aaec8168a50ffcbdd *man/tidy_ifdata_reports.Rd
-50693defe9908273a749834487b5d03b *man/tidy_institutions.Rd
+6df6bf56f05875f0f538956d7ec3517f *man/tidy_institutions.Rd
 73967b7cf868b68afa052b112017cf44 *tests/testthat.R
 2d4b01b3298267d2da3c645e26c322fb *tests/testthat/test-get_balance_sheets.R
 33b18188df599f16e589e8615c9ce4e6 *tests/testthat/test-get_ifdata_registry.R
